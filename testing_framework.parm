@@ -1,7 +1,7 @@
 [GLOBAL]
-$$SMTP_SERVER=psvlxprof2.informatica.com
+$$SMTP_SERVER=server.host.com
 $$TEMP_FILE_PATH=/home/oracle/Desktop/TestingToolTemp
 $$CLASS_PATH=/home/oracle/Desktop/TestingToolTemp/activation.zip;//home/oracle/Desktop/TestingToolTemp/mail.zip
-$$FROM_EMAIL=hshekhar@informatica.com
+$$FROM_EMAIL=hshekhar@abc.com
 $$PASSWORD=aaa
 $$SEND_EMAIL_FLG=N
