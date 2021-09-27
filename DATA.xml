@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TESTCASE DESCRIPTION="Completed" NAME="ADIA Testing Framework Demo">
+	<SETDBVARIABLE SEQUENCE="1" LOOP_PARAM_FILE="/home/oracle/Desktop/TestingToolTemp/Demo_Src_loop.txt" DBPASS="test" SQLQUERY="select count(*) from $$TABLE_NAME" CLASSNAME="oracle.jdbc.OracleDriver" CONNECT_STRING="jdbc:oracle:thin:@psvlxprof2.informatica.com:1521:ORCLPCHC" DBUSER="test" NAME="$$SRC_ROW_COUNT"/>
+	<SETDBVARIABLE SEQUENCE="3" LOOP_PARAM_FILE="/home/oracle/Desktop/TestingToolTemp/Demo_tgt_loop.txt" DBPASS="test" SQLQUERY="select count(*) from $$TABLE_NAME" CLASSNAME="oracle.jdbc.OracleDriver" CONNECT_STRING="jdbc:oracle:thin:@psvlxprof2.informatica.com:1521:ORCLPCHC" DBUSER="test" NAME="$$TGT_ROW_COUNT"/>
+	<SETDBVARIABLE SEQUENCE="4" LOOP_PARAM_FILE="/home/oracle/Desktop/TestingToolTemp/Demo_Src_loop_c.txt" DBPASS="test" SQLQUERY="select count(*) from $$TABLE_NAME where $$CONDITION" CLASSNAME="oracle.jdbc.OracleDriver" CONNECT_STRING="jdbc:oracle:thin:@psvlxprof2.informatica.com:1521:ORCLPCHC" DBUSER="test" NAME="$$SRC_ROW_COUNT_CONDITION"/>
+	<SETDBVARIABLE SEQUENCE="5" LOOP_PARAM_FILE="/home/oracle/Desktop/TestingToolTemp/Demo_tgt_loop_c.txt" DBPASS="test" SQLQUERY="select count(*) from $$TABLE_NAME where $$CONDITION" CLASSNAME="oracle.jdbc.OracleDriver" CONNECT_STRING="jdbc:oracle:thin:@psvlxprof2.informatica.com:1521:ORCLPCHC" DBUSER="test" NAME="$$TGT_ROW_COUNT_CONDITION"/>
+	<SETVARIABLE SEQUENCE="6" VALUE="0" NAME="DEFAULT_VALUE"/>
+	<EXECUTECOMMAND LOOP_PARAM_FILE="/home/oracle/Desktop/TestingToolTemp/Demo_run_wkf.txt" COMMAND="pmcmd startworkflow -sv $$IntegrationService -u $$USER -p $$PWD -f $$FOLDER -d $$DOMAIN -wait $$WORKFLOW" SEQUENCE="2"/>
+	<SETCOMMANDVARIABLE LOOP_PARAM_FILE="/home/oracle/Desktop/TestingToolTemp/Demo_command.txt" SEQUENCE="9" NAME="DIFF_CHECK" COMMAND="diff $$FILE1 $$FILE2 |wc -l | cut -f1 -d&quot; &quot;"/>
+	<TESTCONDITION DESCRIPTION="Compare the rowcount variables for all records" SEQUENCE="7" LOOP_PARAM_FILE="/home/oracle/Desktop/TestingToolTemp/Demo_loop.txt" VARIABLE2="$$TGT_ROW_COUNT" VARIABLE1="$$SRC_ROW_COUNT"/>
+	<TESTCONDITION DESCRIPTION="Compare the rowcount variables for records with condition" SEQUENCE="8" LOOP_PARAM_FILE="/home/oracle/Desktop/TestingToolTemp/Demo_loop_c.txt" VARIABLE2="$$TGT_ROW_COUNT_CONDITION" VARIABLE1="$$SRC_ROW_COUNT_CONDITION"/>
+	<TESTCONDITION DESCRIPTION="Compare two flatfiles" SEQUENCE="10" LOOP_PARAM_FILE="/home/oracle/Desktop/TestingToolTemp/Demo_FF.txt" VARIABLE2="$$TEST_VALUE" VARIABLE1="$$COMMAND_VALUE"/>
+	<ATTACHMENTS/>
+	<TOEMAIL EMAIL_IDS="hshekhar@informatica.com"/>
+	<CRTFILE_DBQUERY SEQUENCE="11" SQLQUERY="SELECT * FROM olympics_a MINUS SELECT * FROM olympics_b" PATH="/home/oracle/Desktop/TestingToolTemp/olympics.dat" DBPASS="test" CLASSNAME="oracle.jdbc.OracleDriver" NAME="Address" DBUSER="test" CONNECT_STRING="jdbc:oracle:thin:@psvlxprof2.informatica.com:1521:ORCLPCHC"/>
+	<CRTFILE_DBQUERY SEQUENCE="12" SQLQUERY="SELECT * FROM airports_a MINUS SELECT * FROM airports_b" PATH="/home/oracle/Desktop/TestingToolTemp/airports.dat" DBPASS="test" CLASSNAME="oracle.jdbc.OracleDriver" NAME="Airports" DBUSER="test" CONNECT_STRING="jdbc:oracle:thin:@psvlxprof2.informatica.com:1521:ORCLPCHC"/>
+</TESTCASE>
